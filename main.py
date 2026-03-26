@@ -129,6 +129,9 @@ def run():
     res = astar(problem, h1)  # using fast heuristic
     print_timetable(res.solution, rooms, problem.slots, problem)
 
+    print("\nUCS")
+    res = ucs(problem)
+    print_timetable(res.solution, rooms, problem.slots)
 
 if __name__ == "__main__":
     run()
