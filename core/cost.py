@@ -1,7 +1,9 @@
 def compute_cost(problem, state):
     cost = 0
-    for s_id, (room, slot) in state.items():
-        session = problem.session_map[s_id]
-        if slot not in session["preferred"]:
+    for c_id, (room, slot) in state.items():
+        course = problem.session_map[c_id]
+
+        if slot not in course["preferred"]:
             cost += 1
+
     return cost
