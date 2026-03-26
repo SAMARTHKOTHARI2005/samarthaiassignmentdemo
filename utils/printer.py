@@ -1,16 +1,42 @@
-def print_timetable(state, rooms, slots):
-    grid = {s: {r["id"]: "-" for r in rooms} for s in slots}
+def print_timetable(state, rooms, slots, problem):
+    DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri"]
 
-    for session, (room, slot) in state.items():
-        grid[slot][room] = session
+    # ✅ 10 time slots per day
+    TIMES = [f"{9+i}-{10+i}" for i in range(10)]
 
-    print("\nFinal Timetable:\n")
+    grid = {}
 
-    header = "Slot\t" + "\t".join([r["id"] for r in rooms])
-    print(header)
-
+    # Initialize grid
     for slot in slots:
-        row = [str(slot)]
-        for r in rooms:
-            row.append(grid[slot][r["id"]])
-        print("\t".join(row))
+        day = DAYS[slot // len(TIMES)]
+        time = TIMES[slot % len(TIMES)]
+
+        if day not in grid:
+            grid[day] = {}
+
+        grid[day][time] = {r["id"]: "-" for r in rooms}
+
+    # Fill assignments
+    for session_id, (room, slot) in state.items():
+        day = DAYS[slot // len(TIMES)]
+        time = TIMES[slot % len(TIMES)]
+
+        session = problem.session_map[session_id]
+        instructor = session["instructor"]
+
+        grid[day][time][room] = f"{session_id} ({instructor})"
+
+    # Print formatted timetable
+    print("\n================ FINAL TIMETABLE ================\n")
+
+    for day in DAYS:
+        print(f"\n===== {day} =====")
+
+        header = ["Time"] + [r["id"] for r in rooms]
+        print("\t".join(header))
+
+        for time in TIMES:
+            row = [time]
+            for r in rooms:
+                row.append(grid[day][time][r["id"]])
+            print("\t".join(row))
