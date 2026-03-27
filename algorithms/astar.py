@@ -4,7 +4,8 @@ from utils.metrics import SearchResult
 def astar(problem, heuristic):
     pq = []
     counter = 0
-    heapq.heappush(pq, (0, counter, 0, problem.initial_state()))
+    start = problem.initial_state()
+    heapq.heappush(pq, (0, counter, 0, start))
     nodes = 0
 
     while pq:
@@ -16,9 +17,13 @@ def astar(problem, heuristic):
 
         for child in problem.successors(state):
             counter += 1
-            new_g = problem.compute_cost(child)
+
+            # incremental cost
+            new_g = g + (problem.compute_cost(child) - problem.compute_cost(state))
+
             h = heuristic(problem, child)
             f = new_g + h
+
             heapq.heappush(pq, (f, counter, new_g, child))
 
     return None

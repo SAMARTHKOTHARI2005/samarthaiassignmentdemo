@@ -12,8 +12,8 @@ def h2(problem, state):
                     valid += 1
 
         if valid > 0:
-            score += 1 / valid
+            score += 1 / (valid + 1)   # smoother
         else:
-            score += 10
+            score += 50   # strong dead-end penalty
 
     return score

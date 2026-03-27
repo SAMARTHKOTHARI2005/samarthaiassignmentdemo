@@ -131,7 +131,7 @@ def run():
 
     print("\nUCS")
     res = ucs(problem)
-    print_timetable(res.solution, rooms, problem.slots)
+    print_timetable(res.solution, rooms, problem.slots, problem)
 
 if __name__ == "__main__":
     run()
