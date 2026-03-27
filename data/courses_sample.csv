@@ -1,4 +1,4 @@
-course_id,instructor_id,capacity,preferred_slots,unavailable_slots
+course_id,instructor_id,capacity_required,preferred_slots,unavailable_slots
 CS101,I1,40,"01|07|12|23|38","08|09"
 CS102,I1,90,"00|04|09|25|31","33"
 CS103,I2,80,"02|06|13|21|47","34"

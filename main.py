@@ -129,11 +129,11 @@ def run():
     res = greedy(problem, h1)
     print_timetable(res.solution, rooms, problem.slots, problem)
 
-    print("\nA* (h1)")
+    print("\nA* (h2)")
     res = astar(problem, h2)  # using fast heuristic
     print_timetable(res.solution, rooms, problem.slots, problem)
 
-    print("\nA* (h2)")
+    print("\nA* (h1)")
     res = astar(problem, h2)  # using fast heuristic
     print_timetable(res.solution, rooms, problem.slots, problem)
 
